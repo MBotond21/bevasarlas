@@ -11,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Product> products;
     private ListView pList;
     private Button add_btn;
+    private CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +38,17 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
+        RetrofitApiService apiService = RetrofitClient.getInstance().create(RetrofitApiService.class);
+        loadProducts(apiService);
+
     }
 
     private void init(){
+        this.products = new ArrayList<>();
         this.pList = findViewById(R.id.product_list);
         this.add_btn = findViewById(R.id.add_btn);
+        this.customAdapter = new CustomAdapter(products, this);
+        pList.setAdapter(customAdapter);
     }
 
     private void loadProducts(RetrofitApiService apiService){
@@ -50,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     products.clear();
                     products.addAll(response.body());
+                    customAdapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(MainActivity.this, "Ez most nem jött össze kicsi!", Toast.LENGTH_SHORT).show();
                 }

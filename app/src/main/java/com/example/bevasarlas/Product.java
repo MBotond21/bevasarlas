@@ -2,52 +2,52 @@ package com.example.bevasarlas;
 
 public class Product {
     private int id;
-    private String name;
-    private int quantity;
-    private int price;
-    private int cat;
+    private String nev;
+    private int darab_ar;
+    private int kategoria;
+    private int mennyiseg;
 
-    public Product(int id, String name, int quantity, int price, int cat) {
+    public Product(int id, String nev, int darab_ar, int kategoria, int mennyiseg) {
         this.id = id;
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
-        this.cat = cat;
+        this.nev = nev;
+        this.darab_ar = darab_ar;
+        this.kategoria = kategoria;
+        this.mennyiseg = mennyiseg;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getNev() {
+        return nev;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNev(String nev) {
+        this.nev = nev;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getDarab_ar() {
+        return darab_ar;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setDarab_ar(int darab_ar) {
+        this.darab_ar = darab_ar;
     }
 
-    public int getPrice() {
-        return price;
+    public int getKategoria() {
+        return kategoria;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setKategoria(int kategoria) {
+        this.kategoria = kategoria;
     }
 
-    public int getCat() {
-        return cat;
+    public int getMennyiseg() {
+        return mennyiseg;
     }
 
-    public void setCat(int cat) {
-        this.cat = cat;
+    public void setMennyiseg(int mennyiseg) {
+        this.mennyiseg = mennyiseg;
     }
 }

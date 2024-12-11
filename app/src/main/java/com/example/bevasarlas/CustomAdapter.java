@@ -44,10 +44,10 @@ public class CustomAdapter extends BaseAdapter {
         TextView kat = view.findViewById(R.id.katText);
 
         Product p = products.get(i);
-        name.setText(p.getName());
-        ar.setText(p.getPrice() + " Ft");
-        db.setText(p.getQuantity() + " db");
-        kat.setText(p.getCat());
+        name.setText(p.getNev());
+        ar.setText(p.getKategoria() + " Ft");
+        db.setText(p.getDarab_ar() + " db");
+        kat.setText(p.getMennyiseg());
 
         return view;
     }
