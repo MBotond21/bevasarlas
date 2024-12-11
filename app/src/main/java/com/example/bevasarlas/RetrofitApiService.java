@@ -15,10 +15,10 @@ public interface RetrofitApiService {
     @GET("lFdUM1/data")
     Call<List<Product>> getProducts();
 
-    @POST("acttFJ/data")
+    @POST("lFdUM1/data")
     Call<Product> createProduct(@Body Product product);
 
-    @DELETE("acttFJ/data/{id}")
+    @DELETE("lFdUM1/data/{id}")
     Call<Void> deleteProduct(@Path("id") int id);
 
 }
