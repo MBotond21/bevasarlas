@@ -1,6 +1,8 @@
 package com.example.bevasarlas;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -41,6 +43,19 @@ public class MainActivity extends AppCompatActivity {
         RetrofitApiService apiService = RetrofitClient.getInstance().create(RetrofitApiService.class);
         loadProducts(apiService);
 
+        pList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                try{
+                    deleteProduct(apiService, products.get((int)id).getId());
+                }catch (Exception e){
+                    Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                return true;
+            }
+        });
+
     }
 
     private void init(){
@@ -67,6 +82,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Ez most nem jött össze kicsi!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void deleteProduct(RetrofitApiService apiService, int id){
+        apiService.deleteProduct(id).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    products.stream()
+                            .filter(o -> o.getId() == id)
+                            .findFirst()
+                            .ifPresent(product -> {
+                                products.remove(product);
+                                customAdapter.notifyDataSetChanged();
+                            });
+                } else {
+                    Toast.makeText(MainActivity.this, "Something went wrong! v1", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Something went wrong! v2", Toast.LENGTH_SHORT).show();
             }
         });
     }
