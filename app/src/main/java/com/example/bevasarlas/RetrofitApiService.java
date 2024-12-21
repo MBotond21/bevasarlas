@@ -12,13 +12,13 @@ import retrofit2.http.Path;
 
 public interface RetrofitApiService {
 
-    @GET("lFdUM1/data")
+    @GET("Qy9vk7/data")
     Call<List<Product>> getProducts();
 
-    @POST("lFdUM1/data")
+    @POST("Qy9vk7/data")
     Call<Product> createProduct(@Body Product product);
 
-    @DELETE("lFdUM1/data/{id}")
+    @DELETE("Qy9vk7/data/{id}")
     Call<Void> deleteProduct(@Path("id") int id);
 
 }

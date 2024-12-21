@@ -47,7 +47,7 @@ public class CustomAdapter extends BaseAdapter {
         name.setText(p.getNev());
         ar.setText(p.getKategoria() + " Ft");
         db.setText(p.getDarab_ar() + " db");
-        kat.setText(p.getMennyiseg());
+        kat.setText(String.valueOf(p.getMennyiseg()));
 
         return view;
     }
